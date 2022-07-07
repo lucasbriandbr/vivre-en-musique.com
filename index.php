@@ -55,10 +55,34 @@
                         <p><?php echo $concert['ville']; ?></p>
                         <p><?php echo $concert['prix']; ?></p>
                         <p><?php echo $concert['dateDuConcert']; ?></p>
+                        <form action="index.php">
+                            <input type="submit" name="edit" value="edit" onclick="editFunction($concert['id'])"/>
+                            <input type="submit" name="delete" value="delete" onclick="deleteFunction($concert['id'])"/>
+                        </form>
                     </div>
                 <?php
             }
 
+        ?>
+
+        <?php
+
+            //  Ajout de la fonction de suppression
+
+            function deleteFunction($id) {
+                
+                $deleteConcertsStatement = $db->prepare('DELETE FROM concerts WHERE id = :'.$id);
+                $deleteConcertsStatement->execute();
+            }
+
+            //  Ajout de la fonction de modification
+
+            function editFunction($id,$modificationNom) {
+                
+                $deleteConcertsStatement = $db->prepare('UPDATE concerts SET nom = :'.$modificationNom.' WHERE id = '.$id);
+                $deleteConcertsStatement->execute();
+            }
+        
         ?>
 
     </body>

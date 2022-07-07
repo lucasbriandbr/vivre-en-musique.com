@@ -20,14 +20,12 @@
             <h3><a href="Angel.html">Angèle</a></h3>
         </table>
 
-        <h1>Liste des concerts disponibles</h1>
-
         <?php
 
             //  connexion à la base de données mysql
 
             try {
-                $mysqlConnexion = new PDO(
+                $db = new PDO(
                     'mysql:host=localhost/dataBase;dbname=concerts;charset=utf8',   //  Connexion avec les précisions de path
                     'root', //  Login
                     'root', //  MotDePasse
@@ -38,20 +36,30 @@
         
         ?>
 
-        <!-- <?php
+        <h1>Liste des concerts disponibles</h1>
 
-        $concertsStatement = $db->prepare('SELECT * FROM concerts');
-        $concertsStatement->execute();
-        $concerts = $concertsStatement->fetchAll();
+        <?php
 
-        foreach ($concert as $concerts){ ?>
-        <div> 
-                    <h2> <?php echo $concert["nom"]  ?></h2>
-                    arr.forEach(callback);
-            </div>
-        }
+            //  On prépare notre requête MySql
 
-        ?> -->
+            $concertsStatement = $db->prepare('SELECT * FROM concerts');
+            $concertsStatement->execute();
+            $concerts = $concertsStatement->fetchAll();
+
+            // On affiche chaque recette une à une
+
+            foreach ($concerts as $concert) {
+                ?>
+                    <div>
+                        <h3><?php echo $concert['nom']; ?></h3>
+                        <p><?php echo $concert['ville']; ?></p>
+                        <p><?php echo $concert['prix']; ?></p>
+                        <p><?php echo $concert['dateDuConcert']; ?></p>
+                    </div>
+                <?php
+            }
+
+        ?>
 
     </body>
 

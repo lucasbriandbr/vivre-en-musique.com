@@ -46,20 +46,22 @@
             $concertsStatement->execute();
             $concerts = $concertsStatement->fetchAll();
 
-            // On affiche chaque recette une à une
+            // On affiche chaque concert un à un
 
             foreach ($concerts as $concert) {
                 ?>
-                    <div>
-                        <h3><?php echo $concert['nom']; ?></h3>
-                        <p><?php echo $concert['ville']; ?></p>
-                        <p><?php echo $concert['prix']; ?></p>
-                        <p><?php echo $concert['dateDuConcert']; ?></p>
-                        <form action="index.php">
-                            <input type="submit" name="edit" value="edit" onclick="editFunction($concert['id'])"/>
-                            <input type="submit" name="delete" value="delete" onclick="deleteFunction($concert['id'])"/>
-                        </form>
-                    </div>
+                    <a href="/<?php echo $concert['id'];?>">
+                        <div>
+                            <h3><?php echo $concert['nom']; ?></h3>
+                            <p><?php echo $concert['ville']; ?></p>
+                            <p><?php echo $concert['prix']; ?></p>
+                            <p><?php echo $concert['dateDuConcert']; ?></p>
+                            <form action="index.php">
+                                <input type="submit" name="edit" value="edit" onclick="editFunction($concert['id'])"/>
+                                <input type="submit" name="delete" value="delete" onclick="deleteFunction($concert['id'])"/>
+                            </form>
+                        </div>
+                    </a>
                 <?php
             }
 
